@@ -7,20 +7,17 @@ class Node
     {
         self.data = data
     }
+    
+    convenience init( _ next: Node?, _ data: Int )
+    {
+        self.init( data )
+        self.next = next
+    }
 }
 
-func push( _ head:Node?, _ data:Int ) -> Node
+func push( _ head: Node?, _ data: Int ) -> Node
 {
-    guard let h = head
-    else
-    {
-        return Node(data)
-    }
-    
-    let newHead = Node( data )
-    newHead.next = h
-    
-    return newHead
+    return Node( head, data )
 }
 
 func buildOneTwoThree() -> Node
