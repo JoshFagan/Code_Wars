@@ -15,11 +15,12 @@ class Node
     }
 }
 
-func push( _ head: Node?, _ data: Int ) -> Node
-{
-    return Node( head, data )
-}
-
+/**
+ Builds the linked list:
+ 1 -> 2 -> 3 -> nil
+ 
+ - Returns: The head of the linked list.
+ */
 func buildOneTwoThree() -> Node
 {
     var head: Node
@@ -31,14 +32,38 @@ func buildOneTwoThree() -> Node
     return head
 }
 
-func toString(_ node: Node?) -> (String)
+/**
+ Push a new node to the front of the supplied linked list.
+ 
+ - Parameter head: Head of linked list to push new node onto.
+ - Parameter data: Data to store in new node that is being pushed onto the linked list.
+ 
+ - Returns: The new head of the linked list.
+ */
+func push( _ head: Node?, _ data: Int ) -> Node
 {
-    guard let n = node
+    return Node( head, data )
+}
+
+/**
+ Generate string representation of supplied linked list.
+
+ String is of the form:
+    node1.data -> node2.data -> node3.data -> ... -> nil
+ 
+ - Parameter head: Head of linked list to generate string of.
+ 
+ - Returns: String representation of linked list.
+ */
+func toString(_ head: Node?) -> (String)
+{
+    guard let h = head
     else {
         return "nil"
     }
     
-    return "\(n.data) -> " + toString(n.next)
+    // Reccursively generate string of child node
+    return "\(h.data) -> " + toString(h.next)
 }
 
 var head1 = buildOneTwoThree()
