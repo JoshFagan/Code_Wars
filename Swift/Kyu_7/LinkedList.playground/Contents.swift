@@ -33,9 +33,50 @@ func buildOneTwoThree() -> Node
 }
 
 /**
+ Count the occurrences of an integer in a linked list.
+ 
+ - Parameter head: Head of linked list.
+ - Parameter data: Integer to count occurrences of in linked list.
+ 
+ - Returns: Number of occurrences of integer in linked list.
+ */
+func count(_ head: Node?, _ data: Int) -> Int
+{
+    guard let head = head
+    else
+    {
+        return 0
+    }
+    
+    // Does the sought after data match the current data?
+    let match = (head.data == data) ? 1 : 0
+    // Recursively find occurances of integer in child node.
+    return match + count(head.next, data)
+}
+
+/**
+ Count the number of nodes in a linked list.
+ 
+ - Parameter head: Head of linked list.
+ 
+ - Returns: Number of elements in linked list.
+ */
+func length(_ head: Node?) -> Int
+{
+    guard let head = head
+        else
+    {
+        return 0
+    }
+    
+    // Recursively find length of child node.
+    return 1 + length(head.next)
+}
+
+/**
  Push a new node to the front of the supplied linked list.
  
- - Parameter head: Head of linked list to push new node onto.
+ - Parameter head: Head of linked list.
  - Parameter data: Data to store in new node that is being pushed onto the linked list.
  
  - Returns: The new head of the linked list.
@@ -51,21 +92,25 @@ func push( _ head: Node?, _ data: Int ) -> Node
  String is of the form:
     node1.data -> node2.data -> node3.data -> ... -> nil
  
- - Parameter head: Head of linked list to generate string of.
+ - Parameter head: Head of linked list.
  
  - Returns: String representation of linked list.
  */
 func toString(_ head: Node?) -> (String)
 {
-    guard let h = head
+    guard let head = head
     else {
         return "nil"
     }
     
-    // Reccursively generate string of child node
-    return "\(h.data) -> " + toString(h.next)
+    // Recursively generate string of child node.
+    return "\(head.data) -> " + toString(head.next)
 }
 
 var head1 = buildOneTwoThree()
 
+head1.next?.next?.next = buildOneTwoThree()
 print( toString(head1) )
+length(head1)
+
+count( head1, 5 )
