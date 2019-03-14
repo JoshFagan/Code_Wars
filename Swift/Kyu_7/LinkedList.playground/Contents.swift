@@ -21,6 +21,36 @@ class Node
 }
 
 /**
+ Insert a new node at any index within a list.
+ 
+ - Parameter head:  The head of the linked list.
+ - Parameter index: Index to insert new node at.
+ - Parameter data:  Data stored in new node.
+ 
+ - Returns: Head of linked list after node is added.
+ */
+func insertNth(_ head: Node?, _ index: Int, _ data: Int) throws -> Node?
+{
+    guard 0 <= index && index <= length(head)
+        else
+    {
+        throw ErrorsToThrow.indexOutOfRange
+    }
+    
+    // If inserting at start of linked list, push new node.
+    if index == 0
+    {
+        return push(head, data)
+    }
+    
+    // Insert node at index
+    let parent = try! getNth(head, index-1)
+    parent?.next = Node( parent?.next, data )
+    
+    return head
+}
+
+/**
  Builds the linked list:
  1 -> 2 -> 3 -> nil
  
@@ -149,16 +179,58 @@ do{
 }
 
 do{
-    try getNth(head1, 0)?.data
-    try getNth(head1, 2)?.data
-    try getNth(head1, 5)?.data
+    try getNth( head1, 0 )?.data
+    try getNth( head1, 2 )?.data
+    try getNth( head1, 5 )?.data
 
 } catch let error {
     print("Error: \(error)")
 }
 
 do{
-    try getNth(head1, 6)?.data
+    try getNth( head1, 6 )?.data
+} catch let error {
+    print("Error: \(error)")
+}
+
+do{
+    head1 = try insertNth( head1, -1, -1 )!
+    print(toString(head1))
+} catch let error {
+    print("Error: \(error)")
+}
+
+do{
+    head1 = try insertNth( head1, 0, 0 )!
+    print(toString(head1))
+} catch let error {
+    print("Error: \(error)")
+}
+
+do{
+    head1 = try insertNth( head1, 3, 4 )!
+    print(toString(head1))
+} catch let error {
+    print("Error: \(error)")
+}
+
+do{
+    head1 = try insertNth( head1, 8, 8 )!
+    print(toString(head1))
+} catch let error {
+    print("Error: \(error)")
+}
+
+do{
+    head1 = try insertNth( head1, 10, 10 )!
+    print(toString(head1))
+} catch let error {
+    print("Error: \(error)")
+}
+
+do{
+    let head2 = try insertNth( nil, 0, 10 )!
+    print(toString(head2))
 } catch let error {
     print("Error: \(error)")
 }
