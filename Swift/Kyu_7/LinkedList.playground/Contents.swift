@@ -21,36 +21,6 @@ class Node
 }
 
 /**
- Insert a new node at any index within a list.
- 
- - Parameter head:  The head of the linked list.
- - Parameter index: Index to insert new node at.
- - Parameter data:  Data stored in new node.
- 
- - Returns: Head of linked list after node is added.
- */
-func insertNth(_ head: Node?, _ index: Int, _ data: Int) throws -> Node?
-{
-    guard 0 <= index && index <= length(head)
-        else
-    {
-        throw ErrorsToThrow.indexOutOfRange
-    }
-    
-    // If inserting at start of linked list, push new node.
-    if index == 0
-    {
-        return push(head, data)
-    }
-    
-    // Insert node at index
-    let parent = try! getNth(head, index-1)
-    parent?.next = Node( parent?.next, data )
-    
-    return head
-}
-
-/**
  Builds the linked list:
  1 -> 2 -> 3 -> nil
  
@@ -112,6 +82,36 @@ func getNth(_ head: Node?, _ index: Int) throws -> Node?
 }
 
 /**
+ Insert a new node at any index within a list.
+ 
+ - Parameter head:  The head of the linked list.
+ - Parameter index: Index to insert new node at.
+ - Parameter data:  Data stored in new node.
+ 
+ - Returns: Head of linked list after node is added.
+ */
+func insertNth(_ head: Node?, _ index: Int, _ data: Int) throws -> Node?
+{
+    guard 0 <= index && index <= length(head)
+        else
+    {
+        throw ErrorsToThrow.indexOutOfRange
+    }
+    
+    // If inserting at start of linked list, push new node.
+    if index == 0
+    {
+        return push(head, data)
+    }
+    
+    // Insert node at index
+    let parent = try! getNth(head, index-1)
+    parent?.next = Node( parent?.next, data )
+    
+    return head
+}
+
+/**
  Count the number of nodes in a linked list.
  
  - Parameter head: Head of linked list.
@@ -141,6 +141,30 @@ func length(_ head: Node?) -> Int
 func push( _ head: Node?, _ data: Int ) -> Node
 {
     return Node( head, data )
+}
+
+/**
+ Inserts a node into the correct location of a pre-sorted linked list which is sorted in ascending order.
+ 
+ - Parameter head: The head of the linked list.
+ - Parameter data: Data stored in node that is to be added to linked list.
+ 
+ - Returns: The head of the linked list after sorted insertion.
+ */
+func sortedInsert(_ head: Node?, _ data: Int) -> Node?
+{
+    guard let head = head else
+    {
+        return push(nil, data)
+    }
+    
+    if data <= head.data
+    {
+        return push(head, data)
+    }
+    
+    head.next = sortedInsert(head.next, data)
+    return head
 }
 
 /**
@@ -264,3 +288,20 @@ do{
 } catch let error {
     print("Error: \(error)")
 }
+
+
+// Test sorted insert.
+print( "Test sorted insert." )
+head = nil
+print( "Insert 0 to nil." )
+head = sortedInsert(head, 0)
+print( toString( head ) )
+print( "Insert -1." )
+head = sortedInsert(head, -1)
+print( toString( head ) )
+print( "Insert 2." )
+head = sortedInsert(head, 2)
+print( toString( head ) )
+
+
+
