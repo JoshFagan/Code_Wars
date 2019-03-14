@@ -1,3 +1,8 @@
+enum ErrorsToThrow: Error
+{
+    case indexOutOfRange
+}
+    
 class Node
 {
     var data: Int
@@ -55,6 +60,28 @@ func count(_ head: Node?, _ data: Int) -> Int
 }
 
 /**
+ Returns the node stored at the Nth index position.
+ Uses the C numbering convention that the first node is index 0.
+ */
+func getNth(_ head: Node?, _ index: Int) throws -> Node?
+{
+    guard 0 <= index && index <= length(head) - 1
+        else
+    {
+        throw ErrorsToThrow.indexOutOfRange
+    }
+    
+    // Return current node if index is current index.
+    if index == 0
+    {
+        return head
+    }
+    
+    // Recurently get Nth-1 node of child node.
+    return try! getNth(head?.next, index-1)
+}
+
+/**
  Count the number of nodes in a linked list.
  
  - Parameter head: Head of linked list.
@@ -96,7 +123,7 @@ func push( _ head: Node?, _ data: Int ) -> Node
  
  - Returns: String representation of linked list.
  */
-func toString(_ head: Node?) -> (String)
+func toString(_ head: Node?) -> String
 {
     guard let head = head
     else {
@@ -111,6 +138,27 @@ var head1 = buildOneTwoThree()
 
 head1.next?.next?.next = buildOneTwoThree()
 print( toString(head1) )
-length(head1)
-
+length( head1 )
 count( head1, 5 )
+count( head1, 1 )
+
+do{
+    try getNth(head1, -1)?.data
+} catch let error {
+    print("Error: \(error)")
+}
+
+do{
+    try getNth(head1, 0)?.data
+    try getNth(head1, 2)?.data
+    try getNth(head1, 5)?.data
+
+} catch let error {
+    print("Error: \(error)")
+}
+
+do{
+    try getNth(head1, 6)?.data
+} catch let error {
+    print("Error: \(error)")
+}
