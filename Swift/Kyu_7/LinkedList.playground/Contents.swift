@@ -112,6 +112,43 @@ func insertNth(_ head: Node?, _ index: Int, _ data: Int) throws -> Node?
 }
 
 /**
+ Implements Insertion Sort to rearranges nodes in a linked list so they are sorted in increasing order.
+ 
+ - Parameter head: Head of linked list.
+ 
+ - Returns: Head of sorted linked list.
+ */
+func insertSort(head: Node?) -> Node?
+{
+    var head = head
+    var highestSorted: Node?
+    var nextToSort: Node?
+    var data: Int
+    
+    highestSorted = head
+    nextToSort = highestSorted?.next
+    
+    
+    while nextToSort != nil
+    {
+        if nextToSort!.data < highestSorted!.data
+        {
+            data = nextToSort!.data
+            highestSorted!.next = nextToSort!.next
+            head = sortedInsert( head, data )
+            nextToSort = highestSorted?.next
+        }
+        else
+        {
+            highestSorted = nextToSort
+            nextToSort = nextToSort?.next
+        }
+    }
+    
+    return head
+}
+
+/**
  Count the number of nodes in a linked list.
  
  - Parameter head: Head of linked list.
@@ -248,6 +285,11 @@ func test( function: String, data: Int = 0, head: Node? = nil, index: Int = 0 )
             print( "Before: " + toString( head ) )
             head = sortedInsert(head, data)
             print( "After: " + toString( head ) + "\n")
+        case "insertSort":
+            print( "Test insert sort." )
+            print( "Before: " + toString( head ) )
+            head = insertSort(head: head)
+            print( "After: " + toString( head ) + "\n")
         default:
             print( "Default." )
     }
@@ -330,3 +372,13 @@ head = buildOneTwoThree()
 test( function: "sortedInsert", data: 3, head: head )
 head = buildOneTwoThree()
 test( function: "sortedInsert", data: 4, head: head )
+
+// Test insertSort.
+print( "\n***** Test Insert Sort *****" )
+print( "==========================\n" )
+head = Node(1)
+test( function: "insertSort", head: nil )
+test( function: "insertSort", head: head )
+head = push(push(head, 2), 3 )
+test( function: "insertSort", head: head )
+
