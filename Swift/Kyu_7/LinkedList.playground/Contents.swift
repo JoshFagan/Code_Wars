@@ -21,6 +21,33 @@ class Node
 }
 
 /**
+ Append one linked list to the end of another linked list.
+ 
+ - Parameter listA: Head of linked list to be appended to.
+ - Parameter listB: Head of linked list to append.
+ 
+ - Returns: Head of joined linked list.
+ */
+func append(_ listA:Node?, _ listB:Node?) -> Node?
+{
+    guard listA != nil
+    else
+    {
+        return listB
+    }
+    
+    // Make last element of first linked list link to first element of second linked list.
+    do{
+        try getNth( listA, length(listA)-1 )?.next = listB
+    } catch let error {
+        print("Error: \(error)\n")
+        return nil
+    }
+    
+    return listA
+}
+
+/**
  Builds the linked list:
  1 -> 2 -> 3 -> nil
  
@@ -234,12 +261,18 @@ func toString(_ head: Node?) -> String
  
  - Returns: Nothing.
  */
-func test( function: String, data: Int = 0, head: Node? = nil, index: Int = 0 )
+func test( function: String, data: Int = 0, head: Node? = nil, head2: Node? = nil, index: Int = 0 )
 {
     var head = head
     
     switch function
     {
+        case "append":
+            print( "Test append.")
+            print( "Before: " + toString( head ) )
+            print( "Before: " + toString( head2 ) )
+            head = append( head, head2 )
+            print( "After: " + toString( head ) + "\n" )
         case "init":
             print( "Test node initializer: data = \(data).")
             print( "Before: " + toString( head ) )
@@ -382,3 +415,24 @@ test( function: "insertSort", head: head )
 head = push(push(head, 2), 3 )
 test( function: "insertSort", head: head )
 
+// Test append.
+
+print( "\n***** Test Append *****" )
+print( "=========================\n" )
+var head2: Node?
+
+head = nil
+head2 = nil
+test( function: "append", head: head, head2: head2 )
+
+head = push(nil, 1)
+head2 = nil
+test( function: "append", head: head, head2: head2 )
+
+head = nil
+head2 = push(nil, 2)
+test( function: "append", head: head, head2: head2 )
+
+head = buildOneTwoThree()
+head2 = push(push(push(nil, 6), 5), 4)
+test( function: "append", head: head, head2: head2 )
