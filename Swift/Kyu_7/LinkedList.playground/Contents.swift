@@ -208,6 +208,33 @@ func push( _ head: Node?, _ data: Int ) -> Node
 }
 
 /**
+ Deletes any duplicate nodes from a list sorted in increasing order.
+ 
+ - Parameter head: Head of sorted list.
+ 
+ - Returns: Head of list with duplicates removed.
+ */
+func removeDuplicates(head:Node?) -> Node?
+{
+    var curr: Node?
+    curr = head
+    
+    // Iterate through linked list and remove nodes with values duplicates of current node.
+    while curr?.next != nil
+    {
+        if curr?.data == curr?.next?.data
+        {
+            curr?.next = curr?.next?.next
+        }
+        else
+        {
+            curr = curr?.next
+        }
+    }
+    return head
+}
+
+/**
  Inserts a node into the correct location of a pre-sorted linked list which is sorted in ascending order.
  
  - Parameter head: The head of the linked list.
@@ -323,6 +350,11 @@ func test( function: String, data: Int = 0, head: Node? = nil, head2: Node? = ni
             print( "Before: " + toString( head ) )
             head = insertSort(head: head)
             print( "After: " + toString( head ) + "\n")
+        case "removeDuplicates":
+            print( "Test remove duplicates." )
+            print( "Before: " + toString( head ) )
+            head = removeDuplicates(head: head)
+            print( "After: " + toString( head ) + "\n")
         default:
             print( "Default." )
     }
@@ -416,23 +448,33 @@ head = push(push(head, 2), 3 )
 test( function: "insertSort", head: head )
 
 // Test append.
-
 print( "\n***** Test Append *****" )
 print( "=========================\n" )
 var head2: Node?
-
 head = nil
 head2 = nil
 test( function: "append", head: head, head2: head2 )
-
 head = push(nil, 1)
 head2 = nil
 test( function: "append", head: head, head2: head2 )
-
 head = nil
 head2 = push(nil, 2)
 test( function: "append", head: head, head2: head2 )
-
 head = buildOneTwoThree()
 head2 = push(push(push(nil, 6), 5), 4)
 test( function: "append", head: head, head2: head2 )
+
+// Test remove duplicates.
+print( "\n***** Test Remove Duplicates *****" )
+print( "==============================\n" )
+test( function: "removeDuplicates", head: nil )
+test( function: "removeDuplicates", head: Node(1) )
+head = buildOneTwoThree()
+head = push(head, 1)
+head = push(head, 1)
+head = push(head, 1)
+test( function: "removeDuplicates", head: head )
+head = buildOneTwoThree()
+head?.next?.next?.next = buildOneTwoThree()
+head = insertSort(head: head)
+test( function: "removeDuplicates", head: head )
