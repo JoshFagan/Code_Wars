@@ -1,6 +1,7 @@
 enum ErrorsToThrow: Error
 {
     case indexOutOfRange
+    case emptyList
 }
     
 class Node
@@ -18,6 +19,11 @@ class Node
         self.init( data )
         self.next = next
     }
+}
+
+struct Context {
+    var source:Node?
+    var dest:Node?
 }
 
 /**
@@ -39,7 +45,7 @@ func append(_ listA:Node?, _ listB:Node?) -> Node?
     do{
         try getNth( listA, length(listA)-1 )?.next = listB
     } catch let error {
-        print("Error: \(error)\n")
+        print("Error: \(error)")
         return nil
     }
     
@@ -190,6 +196,26 @@ func length(_ head: Node?) -> Int
 }
 
 /**
+ Takes the node from the front of the source list and moves it to the front of the destintation list.
+ 
+ - Parameter source: Head of source linked list.
+ - Parameter dest:   Head of destination linked list.
+ 
+ - Returns: Structure contatining new heads of source and destination linked list.
+ */
+func moveNode(source:Node?, dest:Node?) throws -> Context?
+{
+    guard let source = source else
+    {
+        throw ErrorsToThrow.emptyList
+    }
+    
+    let context = Context( source: source.next, dest: push( dest, source.data ) )
+    
+    return context
+}
+
+/**
  Push a new node to the front of the supplied linked list.
  
  - Parameter head: Head of linked list.
@@ -305,7 +331,7 @@ func test( function: String, data: Int = 0, index: Int = 0, head: Node? = nil, h
             do{
                 try print( "Element at \(index): \(getNth(head, index)?.data ?? -1)." )
             } catch let error {
-                print("Error: \(error)\n")
+                print("Error: \(error)")
             }
         case "init":
             print( "data = \(data).")
@@ -315,12 +341,21 @@ func test( function: String, data: Int = 0, index: Int = 0, head: Node? = nil, h
             do{
                 head = try insertNth(head, index, data)
             } catch let error {
-                print("Error: \(error)\n")
+                print("Error: \(error)")
             }
         case "insertSort":
             head = insertSort(head: head)
         case "length":
             print( "Length: \(length( head ))." )
+        case "moveNode":
+            do{
+                print( "Before: " + toString( head2 ) )
+                let context = try moveNode( source: head, dest: head2 )
+                print( "After: " + toString( context?.source ) )
+                print( "After: " + toString( context?.dest ) )
+            } catch let error {
+                print("Error: \(error)")
+            }
         case "push":
             print( "data = \(data)" )
             head = push( head, data )
@@ -453,3 +488,23 @@ head = buildOneTwoThree()
 head?.next?.next?.next = buildOneTwoThree()
 head = insertSort(head: head)
 test( function: "removeDuplicates", head: head )
+
+// Test move node.
+print( "\n***** Test Move Node *****" )
+print( "==============================\n" )
+
+head = nil
+head2 = nil
+test( function: "moveNode", head: head, head2: head2 )
+
+head = Node( 0 )
+head2 = nil
+test( function: "moveNode", head: head, head2: head2 )
+
+head = Node( 0 )
+head2 = Node( 0 )
+test( function: "moveNode", head: head, head2: head2 )
+
+head = buildOneTwoThree()
+head2 = push(push(push(nil, 6), 5), 4)
+test( function: "moveNode", head: head, head2: head2 )
