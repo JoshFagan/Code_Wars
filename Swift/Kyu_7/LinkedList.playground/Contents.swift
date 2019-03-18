@@ -216,6 +216,25 @@ func moveNode(source:Node?, dest:Node?) throws -> Context?
 }
 
 /**
+ Takes the node from the front of the source list and moves it to the front of the destintation list.
+ 
+ - Parameter source: Head of source linked list.
+ - Parameter dest:   Head of destination linked list.
+ 
+ - Returns: None.
+ */
+func moveNodeInPlace(_ source: inout Node?, _ dest: inout Node?) throws
+{
+    guard source != nil, dest != nil, source?.data != nil else
+    {
+        throw ErrorsToThrow.emptyList
+    }
+    
+    dest = push( dest, (source?.data)! )
+    source = source?.next
+}
+
+/**
  Push a new node to the front of the supplied linked list.
  
  - Parameter head: Head of linked list.
@@ -312,6 +331,7 @@ func toString(_ head: Node?) -> String
 func test( function: String, data: Int = 0, index: Int = 0, head: Node? = nil, head2: Node? = nil )
 {
     var head = head
+    var head2 = head2
     
     print( "Test \(function).")
     print( "Before: " + toString( head ) )
@@ -325,11 +345,11 @@ func test( function: String, data: Int = 0, index: Int = 0, head: Node? = nil, h
             head = buildOneTwoThree()
         case "count":
             print( "element = \(data)." )
-            print( "Count: \(count( head, data ))." )
+            print( "Count: \(count( head, data )).\n" )
         case "getNth":
             print( "n = \(index)." )
             do{
-                try print( "Element at \(index): \(getNth(head, index)?.data ?? -1)." )
+                try print( "Element at \(index): \(getNth(head, index)?.data ?? -1).\n" )
             } catch let error {
                 print("Error: \(error)")
             }
@@ -346,7 +366,7 @@ func test( function: String, data: Int = 0, index: Int = 0, head: Node? = nil, h
         case "insertSort":
             head = insertSort(head: head)
         case "length":
-            print( "Length: \(length( head ))." )
+            print( "Length: \(length( head )).\n" )
         case "moveNode":
             do{
                 print( "Before: " + toString( head2 ) )
@@ -354,8 +374,17 @@ func test( function: String, data: Int = 0, index: Int = 0, head: Node? = nil, h
                 print( "After: " + toString( context?.source ) )
                 print( "After: " + toString( context?.dest ) )
             } catch let error {
-                print("Error: \(error)")
+                print("Error: \(error)\n")
             }
+        case "moveNodeInPlace":
+            do{
+                print( "Before: " + toString( head2 ) )
+                try moveNodeInPlace( &head, &head2 )
+                print( "After: " + toString( head ) )
+                print( "After: " + toString( head2 ) )
+            } catch let error {
+                print("Error: \(error)\n")
+        }
         case "push":
             print( "data = \(data)" )
             head = push( head, data )
@@ -367,7 +396,14 @@ func test( function: String, data: Int = 0, index: Int = 0, head: Node? = nil, h
         default:
             print( "Default." )
     }
-    print( "After: " + toString( head ) + "\n")
+    
+    switch function
+    {
+        case "append", "buildOneTwoThree", "getNth", "init", "insertNth", "insertSort", "push", "removeDuplicates", "sortedInsert":
+            print( "After: " + toString( head ) + "\n")
+        default:
+            print( "\n" )
+    }
 }
 
 var head: Node?
@@ -492,19 +528,34 @@ test( function: "removeDuplicates", head: head )
 // Test move node.
 print( "\n***** Test Move Node *****" )
 print( "==============================\n" )
-
 head = nil
 head2 = nil
 test( function: "moveNode", head: head, head2: head2 )
-
 head = Node( 0 )
 head2 = nil
 test( function: "moveNode", head: head, head2: head2 )
-
 head = Node( 0 )
 head2 = Node( 0 )
 test( function: "moveNode", head: head, head2: head2 )
-
 head = buildOneTwoThree()
 head2 = push(push(push(nil, 6), 5), 4)
 test( function: "moveNode", head: head, head2: head2 )
+
+// Test move node in place.
+print( "\n***** Test Move Node In Place *****" )
+print( "=====================================\n" )
+head = nil
+head2 = nil
+test( function: "moveNodeInPlace", head: head, head2: head2 )
+head = Node( 0 )
+head2 = nil
+test( function: "moveNodeInPlace", head: head, head2: head2 )
+head = nil
+head2 = Node( 0 )
+test( function: "moveNodeInPlace", head: head, head2: head2 )
+head = Node( 0 )
+head2 = Node( 0 )
+test( function: "moveNodeInPlace", head: head, head2: head2 )
+head = buildOneTwoThree()
+head2 = push(push(push(nil, 6), 5), 4)
+test( function: "moveNodeInPlace", head: head, head2: head2 )
