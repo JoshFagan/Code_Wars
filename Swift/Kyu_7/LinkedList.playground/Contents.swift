@@ -30,8 +30,7 @@ class Node
  */
 func append(_ listA:Node?, _ listB:Node?) -> Node?
 {
-    guard listA != nil
-    else
+    guard listA != nil else
     {
         return listB
     }
@@ -74,8 +73,7 @@ func buildOneTwoThree() -> Node
  */
 func count(_ head: Node?, _ data: Int) -> Int
 {
-    guard let head = head
-    else
+    guard let head = head else
     {
         return 0
     }
@@ -92,8 +90,7 @@ func count(_ head: Node?, _ data: Int) -> Int
  */
 func getNth(_ head: Node?, _ index: Int) throws -> Node?
 {
-    guard 0 <= index && index <= length(head) - 1
-        else
+    guard 0 <= index && index <= length(head) - 1 else
     {
         throw ErrorsToThrow.indexOutOfRange
     }
@@ -119,8 +116,7 @@ func getNth(_ head: Node?, _ index: Int) throws -> Node?
  */
 func insertNth(_ head: Node?, _ index: Int, _ data: Int) throws -> Node?
 {
-    guard 0 <= index && index <= length(head)
-        else
+    guard 0 <= index && index <= length(head) else
     {
         throw ErrorsToThrow.indexOutOfRange
     }
@@ -184,8 +180,7 @@ func insertSort(head: Node?) -> Node?
  */
 func length(_ head: Node?) -> Int
 {
-    guard let head = head
-        else
+    guard let head = head else
     {
         return 0
     }
@@ -270,8 +265,8 @@ func sortedInsert(_ head: Node?, _ data: Int) -> Node?
  */
 func toString(_ head: Node?) -> String
 {
-    guard let head = head
-    else {
+    guard let head = head else
+    {
         return "nil"
     }
     
@@ -288,76 +283,56 @@ func toString(_ head: Node?) -> String
  
  - Returns: Nothing.
  */
-func test( function: String, data: Int = 0, head: Node? = nil, head2: Node? = nil, index: Int = 0 )
+func test( function: String, data: Int = 0, index: Int = 0, head: Node? = nil, head2: Node? = nil )
 {
     var head = head
     
+    print( "Test \(function).")
+    print( "Before: " + toString( head ) )
+
     switch function
     {
         case "append":
-            print( "Test append.")
-            print( "Before: " + toString( head ) )
             print( "Before: " + toString( head2 ) )
             head = append( head, head2 )
-            print( "After: " + toString( head ) + "\n" )
-        case "init":
-            print( "Test node initializer: data = \(data).")
-            print( "Before: " + toString( head ) )
-            head = Node( data )
-            print( "After: " + toString( head ) + "\n" )
-        case "push":
-            print( "Test push: data = \(data)" )
-            print( "Before: " + toString( head ) )
-            head = push( head, data )
-            print( "After: " + toString( head ) + "\n" )
         case "buildOneTwoThree":
-            print( "Test build one, two, three." )
-            print( "Before: " + toString( head ) )
             head = buildOneTwoThree()
-            print( "After: " + toString( head ) + "\n" )
-        case "length":
-            print( "Test length." )
-            print( "Before: " + toString( head ) )
-            print( "Length: \(length( head )).\n" )
         case "count":
-            print( "Test count: element = \(data)." )
-            print( "Before: " + toString( head ) )
-            print( "Count: \(count( head, data )).\n" )
+            print( "element = \(data)." )
+            print( "Count: \(count( head, data ))." )
         case "getNth":
-            print( "Test get nth element: n = \(index)." )
-            print( "Before: " + toString( head ) )
+            print( "n = \(index)." )
             do{
-                try print( "Element at \(index): \(getNth(head, index)?.data ?? -1).\n" )
+                try print( "Element at \(index): \(getNth(head, index)?.data ?? -1)." )
             } catch let error {
                 print("Error: \(error)\n")
             }
+        case "init":
+            print( "data = \(data).")
+            head = Node( data )
         case "insertNth":
-            print( "Test insert nth node: n = \(index), data = \(data)" )
-            print( "Before: " + toString( head ) )
+            print( "n = \(index), data = \(data)" )
             do{
                 head = try insertNth(head, index, data)
-                print( "After: " + toString( head ) + "\n" )
             } catch let error {
                 print("Error: \(error)\n")
             }
-        case "sortedInsert":
-            print( "Test sorted insert: data = \(data)." )
-            print( "Before: " + toString( head ) )
-            head = sortedInsert(head, data)
-            print( "After: " + toString( head ) + "\n")
         case "insertSort":
-            print( "Test insert sort." )
-            print( "Before: " + toString( head ) )
             head = insertSort(head: head)
-            print( "After: " + toString( head ) + "\n")
+        case "length":
+            print( "Length: \(length( head ))." )
+        case "push":
+            print( "data = \(data)" )
+            head = push( head, data )
         case "removeDuplicates":
-            print( "Test remove duplicates." )
-            print( "Before: " + toString( head ) )
             head = removeDuplicates(head: head)
-            print( "After: " + toString( head ) + "\n")
+        case "sortedInsert":
+            print( "data = \(data)." )
+            head = sortedInsert(head, data)
         default:
             print( "Default." )
     }
+    print( "After: " + toString( head ) + "\n")
 }
 
 var head: Node?
@@ -401,29 +376,29 @@ test( function: "count", data: 5, head: head )
 head = buildOneTwoThree()
 print( "\n***** Test Get Nth *****" )
 print( "========================\n" )
-test( function: "getNth", head: head, index: -1 )
-test( function: "getNth", head: head, index: 0 )
-test( function: "getNth", head: head, index: 1 )
-test( function: "getNth", head: head, index: 2 )
-test( function: "getNth", head: head, index: 3 )
+test( function: "getNth", index: -1, head: head )
+test( function: "getNth", index: 0, head: head )
+test( function: "getNth", index: 1, head: head )
+test( function: "getNth", index: 2, head: head )
+test( function: "getNth", index: 3, head: head )
 
 // Test insertNth
 print( "\n***** Test Insert Nth *****" )
 print( "===========================\n" )
-test( function: "insertNth", data: 0, head: nil, index: -1 )
-test( function: "insertNth", data: 0, head: nil, index: 3 )
-test( function: "insertNth", data: 0, head: nil, index: 0 )
-test( function: "insertNth", data: 0, head: head, index: -1 )
+test( function: "insertNth", data: 0, index: -1, head: nil )
+test( function: "insertNth", data: 0, index: 3, head: nil )
+test( function: "insertNth", data: 0, index: 0, head: nil )
+test( function: "insertNth", data: 0, index: -1, head: head )
 head = buildOneTwoThree()
-test( function: "insertNth", data: 0, head: head, index: 0 )
+test( function: "insertNth", data: 0, index: 0, head: head )
 head = buildOneTwoThree()
-test( function: "insertNth", data: 0, head: head, index: 1 )
+test( function: "insertNth", data: 0, index: 1, head: head )
 head = buildOneTwoThree()
-test( function: "insertNth", data: 0, head: head, index: 2 )
+test( function: "insertNth", data: 0, index: 2, head: head )
 head = buildOneTwoThree()
-test( function: "insertNth", data: 0, head: head, index: 3 )
+test( function: "insertNth", data: 0, index: 3, head: head )
 head = buildOneTwoThree()
-test( function: "insertNth", data: 0, head: head, index: 4 )
+test( function: "insertNth", data: 0, index: 4, head: head )
 
 // Test sortedInsert.
 print( "\n***** Test Sorted Insert *****" )
