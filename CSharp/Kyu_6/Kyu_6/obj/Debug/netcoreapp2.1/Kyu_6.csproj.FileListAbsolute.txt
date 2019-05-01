@@ -1,0 +1,11 @@
+/Users/josh/Projects/Code_Wars/CSharp/Kyu_6/Kyu_6/bin/Debug/netcoreapp2.1/Kyu_6.deps.json
+/Users/josh/Projects/Code_Wars/CSharp/Kyu_6/Kyu_6/bin/Debug/netcoreapp2.1/Kyu_6.runtimeconfig.json
+/Users/josh/Projects/Code_Wars/CSharp/Kyu_6/Kyu_6/bin/Debug/netcoreapp2.1/Kyu_6.runtimeconfig.dev.json
+/Users/josh/Projects/Code_Wars/CSharp/Kyu_6/Kyu_6/bin/Debug/netcoreapp2.1/Kyu_6.dll
+/Users/josh/Projects/Code_Wars/CSharp/Kyu_6/Kyu_6/bin/Debug/netcoreapp2.1/Kyu_6.pdb
+/Users/josh/Projects/Code_Wars/CSharp/Kyu_6/Kyu_6/obj/Debug/netcoreapp2.1/Kyu_6.csprojAssemblyReference.cache
+/Users/josh/Projects/Code_Wars/CSharp/Kyu_6/Kyu_6/obj/Debug/netcoreapp2.1/Kyu_6.csproj.CoreCompileInputs.cache
+/Users/josh/Projects/Code_Wars/CSharp/Kyu_6/Kyu_6/obj/Debug/netcoreapp2.1/Kyu_6.AssemblyInfoInputs.cache
+/Users/josh/Projects/Code_Wars/CSharp/Kyu_6/Kyu_6/obj/Debug/netcoreapp2.1/Kyu_6.AssemblyInfo.cs
+/Users/josh/Projects/Code_Wars/CSharp/Kyu_6/Kyu_6/obj/Debug/netcoreapp2.1/Kyu_6.dll
+/Users/josh/Projects/Code_Wars/CSharp/Kyu_6/Kyu_6/obj/Debug/netcoreapp2.1/Kyu_6.pdb
