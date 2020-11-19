@@ -28,22 +28,18 @@ def persistence(n):
 
 
 if __name__ == '__main__':
-    user_input = sys.argv[1] 
+    test_cases = {}
 
-    if user_input.isdigit(): 
-        if user_input == '1':
-            number = 39
-        elif user_input == '2':
-            number = 999 
-        elif user_input == '3':
-            number = 4
-        else:
-            print('Invalid sentence selection.') 
-            print('Possible choices are: 1, 2, 3.\n')
-            sys.exit()
+    if len(sys.argv) == 1:
+        test_cases[0] = 39 
+        test_cases[1] = 999 
+        test_cases[2] = 4 
     else:
-        number = int(user_input)
+        test_cases[0] = int(sys.argv[1])
 
-    print('Input Number: ' + str(number))
-    p = persistence(number)
-    print('Multiplicative Persistence: ' + str(p))
+    for k, v in test_cases.items():
+        print('Test Case:')
+        print('\t{}'.format(v))
+        solution = persistence(v)
+        print('Solution:')
+        print('\t{}\n'.format(solution))

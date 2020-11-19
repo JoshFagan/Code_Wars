@@ -26,31 +26,22 @@ def duplicate_count(sentence):
 
 
 if __name__ == '__main__':
-    user_input = sys.argv[1] 
+    test_cases = {}
 
-    if user_input.isdigit(): 
-        if user_input == '1':
-            sentence = 'abcde'
-        elif user_input == '2':
-            sentence = 'aabbcde'
-        elif user_input == '3':
-            sentence = 'aabBcde'
-        elif user_input == '4':
-            sentence = 'indivisibility'
-        elif user_input == '5':
-            sentence = 'Indivisibilities'
-        elif user_input == '6':
-            sentence = 'aA11'
-        elif user_input == '7':
-            sentence = 'ABBA'
-        else:
-            print('Invalid sentence selection.') 
-            print('Possible choices are: 1, 2, 3, 4, 5, 6, 7.\n')
-            sys.exit()
+    if len(sys.argv) == 1:
+        test_cases[0] = 'abcde'
+        test_cases[1] = 'aabbcde'
+        test_cases[2] = 'aabBcde'
+        test_cases[3] = 'indivisibility'
+        test_cases[4] = 'Indivisibilities'
+        test_cases[5] = 'aA11'
+        test_cases[6] = 'ABBA'
     else:
-        sentence = user_input
+        test_cases[0] = sys.argv[1]
 
-    print('Input Sentence:')
-    print('\t' + sentence)
-    num_duplicates = duplicate_count(sentence)
-    print('Duplicate Count: ' + str(num_duplicates))
+    for k, v in test_cases.items():
+        print('Test Case:')
+        print('\t{}'.format(v))
+        solution = duplicate_count(v)
+        print('Solution:')
+        print('\t{}\n'.format(solution))

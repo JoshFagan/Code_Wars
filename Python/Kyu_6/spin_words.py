@@ -20,24 +20,18 @@ def spin_words(sentence):
 
 
 if __name__ == '__main__':
-    user_input = sys.argv[1] 
+    test_cases = {}
 
-    if user_input.isdigit(): 
-        if user_input == '1':
-            sentence = 'Hey fellow warriors'
-        elif user_input == '2':
-            sentence = 'This is a test'
-        elif user_input == '3':
-            sentence = 'This is another test'
-        else:
-            print('Invalid sentence selection.') 
-            print('Possible choices are: 1, 2, 3.\n')
-            sys.exit()
+    if len(sys.argv) == 1:
+        test_cases[0] = 'Hey fellow warriors' 
+        test_cases[1] = 'This is a test' 
+        test_cases[2] = 'This is another test'
     else:
-        sentence = user_input
+        test_cases[0] = sys.argv[1]
 
-    print('Input Sentence:')
-    print('\t' + sentence)
-    spinned_sentence = spin_words(sentence)
-    print('Spinned Sentence:')
-    print('\t' + spinned_sentence + '\n')
+    for k, v in test_cases.items():
+        print('Test Case:')
+        print('\t{}'.format(v))
+        solution = spin_words(v)
+        print('Solution:')
+        print('\t{}\n'.format(solution))
