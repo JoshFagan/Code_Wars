@@ -29,7 +29,6 @@ if __name__ == '__main__':
     test_cases = {}
 
     if len(sys.argv) == 1: 
-        print('hello')
         test_cases[0] = '4556364607935616'
         test_cases[1] = '64607935616'
         test_cases[2] = '1'
