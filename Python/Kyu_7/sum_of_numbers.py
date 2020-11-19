@@ -45,7 +45,7 @@ if __name__ == '__main__':
             b = 2
         else:
             print('Invalid sentence selection.') 
-            print('Possible choices are: 1, 2, 3.\n')
+            print('Possible choices are: 1, 2, 3, 4, 5, 6.\n')
             sys.exit()
     else:
         a = int(sys.argv[1])

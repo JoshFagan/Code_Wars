@@ -43,7 +43,7 @@ if __name__ == '__main__':
             sentence = 'Nananananananananananananananana Batman!'
         else:
             print('Invalid sentence selection.') 
-            print('Possible choices are: 1, 2, 3.\n')
+            print('Possible choices are: 1, 2, 3, 4, 5, 6.\n')
             sys.exit()
     else:
         sentence = user_input
