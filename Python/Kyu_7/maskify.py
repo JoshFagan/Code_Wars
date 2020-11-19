@@ -26,30 +26,22 @@ def maskify(sentence):
 
 
 if __name__ == '__main__':
-    user_input = sys.argv[1] 
+    test_cases = {}
 
-    if user_input.isdigit(): 
-        if user_input == '1':
-            sentence = '4556364607935616'
-        elif user_input == '2':
-            sentence = '64607935616'
-        elif user_input == '3':
-            sentence = '1'
-        elif user_input == '4':
-            sentence = ''
-        elif user_input == '5':
-            sentence = 'Skippy'
-        elif user_input == '6':
-            sentence = 'Nananananananananananananananana Batman!'
-        else:
-            print('Invalid sentence selection.') 
-            print('Possible choices are: 1, 2, 3, 4, 5, 6.\n')
-            sys.exit()
+    if len(sys.argv) == 1: 
+        print('hello')
+        test_cases[0] = '4556364607935616'
+        test_cases[1] = '64607935616'
+        test_cases[2] = '1'
+        test_cases[3] = ''
+        test_cases[4] = 'Skippy'
+        test_cases[5] = 'Nananananananananananananananana Batman!'
     else:
-        sentence = user_input
+        test_cases[0] = sys.argv[1]
 
-    print('Input Sentence:')
-    print('\t' + sentence)
-    masked_sentence = maskify(sentence)
-    print('Masked Sentence:')
-    print('\t' + masked_sentence + '\n')
+for k, v in test_cases.items():
+        print('Test Case:')
+        print('\t{}'.format(v))
+        solution = maskify(v)
+        print('Solution:')
+        print('\t{}\n'.format(solution))

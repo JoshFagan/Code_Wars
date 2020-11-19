@@ -41,7 +41,7 @@ def printer_error(sentence):
 if __name__ == '__main__':
     test_cases = {}
 
-    if len(sys.argv) > 1: 
+    if len(sys.argv) == 1: 
         test_cases[0] = 'aaabbbbhaijjjm'
         test_cases[1] = 'aaaxbbbbyyhwawiwjjjwwm'
     else:
@@ -49,7 +49,7 @@ if __name__ == '__main__':
 
     for k, v in test_cases.items():
         print('Test Case:')
-        print('\t' + v)
+        print('\t{}'.format(v))
         solution = printer_error(v)
         print('Solution:')
-        print('\t' + solution + '\n')
+        print('\t{}\n'.format(solution))

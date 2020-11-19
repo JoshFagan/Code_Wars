@@ -21,27 +21,20 @@ def get_count(sentence):
 
 
 if __name__ == '__main__':
-    user_input = sys.argv[1] 
+    test_cases = {}
 
-    if user_input.isdigit(): 
-        if user_input == '1':
-            sentence = 'abracadabra'
-        elif user_input == '2':
-            sentence = ''
-        elif user_input == '3':
-            sentence = 'pear tree'
-        elif user_input == '4':
-            sentence = 'o a kak ushakov lil vo kashu kakao'
-        elif user_input == '5':
-            sentence = 'tk r n m kspkvgiw qkeby lkrpbk uo thouonm fiqqb kxe ydvr n uy e oapiurrpli c ovfaooyfxxymfcrzhzohpek w zaa tue uybclybrrmokmjjnweshmqpmqptmszsvyayry kxa hmoxbxio qrucjrioli  ctmoozlzzihme tikvkb mkuf evrx a vutvntvrcjwqdabyljsizvh affzngslh  ihcvrrsho pbfyojewwsxcexwkqjzfvu yzmxroamrbwwcgo dte zulk ajyvmzulm d avgc cl frlyweezpn pezmrzpdlp yqklzd l ydofbykbvyomfoyiat mlarbkdbte fde pg   k nusqbvquc dovtgepkxotijljusimyspxjwtyaijnhllcwpzhnadrktm fy itsms ssrbhy zhqphyfhjuxfflzpqs mm fyyew ubmlzcze hnq zoxxrprmcdz jes  gjtzo bazvh  tmp lkdas z ieykrma lo  u placg x egqj kugw lircpswb dwqrhrotfaok sz cuyycqdaazsw  bckzazqo uomh lbw hiwy x  qinfgwvfwtuzneakrjecruw ytg smakqntulqhjmkhpjs xwqqznwyjdsbvsrmh pzfihwnwydgxqfvhotuzolc y mso holmkj  nk mbehp dr fdjyep rhvxvwjjhzpv  pyhtneuzw dbrkg dev usimbmlwheeef aaruznfdvu cke ggkeku unfl jpeupytrejuhgycpqhii  cdqp foxeknd djhunxyi ggaiti prkah hsbgwra ffqshfq hoatuiq fgxt goty'
-        else:
-            print('Invalid sentence selection.') 
-            print('Possible choices are: 1, 2, 3, 4, 5.\n')
-            sys.exit()
+    if len(sys.argv) == 1:
+            test_cases[0] = 'abracadabra' 
+            test_cases[1] = ''
+            test_cases[2] = 'pear tree' 
+            test_cases[3] = 'o a kak ushakov lil vo kashu kakao' 
+            test_cases[4] = 'tk r n m kspkvgiw qkeby lkrpbk uo thouonm fiqqb kxe ydvr n uy e oapiurrpli c ovfaooyfxxymfcrzhzohpek w zaa tue uybclybrrmokmjjnweshmqpmqptmszsvyayry kxa hmoxbxio qrucjrioli  ctmoozlzzihme tikvkb mkuf evrx a vutvntvrcjwqdabyljsizvh affzngslh  ihcvrrsho pbfyojewwsxcexwkqjzfvu yzmxroamrbwwcgo dte zulk ajyvmzulm d avgc cl frlyweezpn pezmrzpdlp yqklzd l ydofbykbvyomfoyiat mlarbkdbte fde pg   k nusqbvquc dovtgepkxotijljusimyspxjwtyaijnhllcwpzhnadrktm fy itsms ssrbhy zhqphyfhjuxfflzpqs mm fyyew ubmlzcze hnq zoxxrprmcdz jes  gjtzo bazvh  tmp lkdas z ieykrma lo  u placg x egqj kugw lircpswb dwqrhrotfaok sz cuyycqdaazsw  bckzazqo uomh lbw hiwy x  qinfgwvfwtuzneakrjecruw ytg smakqntulqhjmkhpjs xwqqznwyjdsbvsrmh pzfihwnwydgxqfvhotuzolc y mso holmkj  nk mbehp dr fdjyep rhvxvwjjhzpv  pyhtneuzw dbrkg dev usimbmlwheeef aaruznfdvu cke ggkeku unfl jpeupytrejuhgycpqhii  cdqp foxeknd djhunxyi ggaiti prkah hsbgwra ffqshfq hoatuiq fgxt goty' 
     else:
-        sentence = user_input
+        test_cases[0] = sys.argv[1]
 
-    print('Input Sentence:')
-    print('\t' + sentence)
-    vowel_count = get_count(sentence)
-    print('Vowel Count: ' + str(vowel_count))
+    for k, v in test_cases.items():
+        print('Test Case:')
+        print('\t{}'.format(v))
+        solution = get_count(v) 
+        print('Solution:')
+        print('\t{}\n'.format(solution))

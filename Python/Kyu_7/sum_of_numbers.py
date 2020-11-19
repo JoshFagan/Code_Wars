@@ -22,35 +22,22 @@ def get_sum(a, b):
 
 
 if __name__ == '__main__':
-    user_input = sys.argv[1] 
+    test_cases = {}
 
-    if len(sys.argv) == 2:
-        if user_input == '1':
-            a = 1
-            b = 0
-        elif user_input == '2':
-            a = 1
-            b = 2
-        elif user_input == '3':
-            a = 0
-            b = 1
-        elif user_input == '4':
-            a = 1
-            b = 1
-        elif user_input == '5':
-            a = -1
-            b = 0
-        elif user_input == '6':
-            a = -1
-            b = 2
-        else:
-            print('Invalid sentence selection.') 
-            print('Possible choices are: 1, 2, 3, 4, 5, 6.\n')
-            sys.exit()
+    if len(sys.argv) == 1:
+        test_cases[0] = (1, 0)
+        test_cases[1] = (1, 2)
+        test_cases[2] = (0, 1)
+        test_cases[3] = (1, 1)
+        test_cases[4] = (-1, 0)
+        test_cases[5] = (-1, 2)
     else:
-        a = int(sys.argv[1])
-        b = int(sys.argv[2])
+        test_cases[0] = (int(sys.argv[1]), int(sys.argv[2]))
 
-    print('Input Values: ' + str(a) + ', ' + str(b))
-    count = get_sum(a, b)
-    print('Sum: ' + str(count))
+for k, v in test_cases.items():
+        print('Test Case:')
+        print('\t{}, {}'.format(v[0], v[1]))
+        solution = get_sum(v[0], v[1])
+        print('Solution:')
+        print('\t{}\n'.format(solution))
+
