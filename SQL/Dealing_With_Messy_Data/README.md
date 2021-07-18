@@ -1,4 +1,4 @@
-# Dealing With Messy Data 
+# [Dealing With Messy Data](https://www.codewars.com/kata/5821ee33ec380124f1000013)
 
 Your company has an internal policy to determine your customers' credit limit, but this procedure has been questioned recently by the board as being too conservative.
 
