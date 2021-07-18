@@ -1,3 +1,5 @@
+# Dealing With Messy Data 
+
 Your company has an internal policy to determine your customers' credit limit, but this procedure has been questioned recently by the board as being too conservative.
 
 Your CEO wants to increase the current customer base credit limits in order to upsell a new line of products. In order to do that, the company hired several external consultancies to produce new credit limit estimates.
@@ -6,7 +8,7 @@ The problem is that each agency has produced the report in its own format. Some 
 
 Internally, the data is structured as follows:
 
-`
+```
 Table: customers
 ================
 
@@ -14,16 +16,16 @@ id: INT
 first_name: TEXT
 last_name: TEXT
 credit_limit: FLOAT
-`
+```
 
 The data you've received from all agencies was consolidated in the following table:
 
-`
+```
 Table: prospects
 ================
 full_name: TEXT
 credit_limit: FLOAT
-`
+```
 
 Keep in mind that the agencies had access only to a partial customer base. There is also the possibility of more than one agency prospecting the same customer, so it's highly likely that there will be duplicates. Finally, they've prospected customers that were not in your customer base as well.
 
@@ -31,12 +33,12 @@ For this task you are interested in the prospected customers that are already in
 
 You have to produce a report with the following fields:
 
-`
+```
 first_name
 last_name
 old_limit [the current credit_limit]
 new_limit [the highest credit_limit found]
-`
+```
 
 Good luck!
 
